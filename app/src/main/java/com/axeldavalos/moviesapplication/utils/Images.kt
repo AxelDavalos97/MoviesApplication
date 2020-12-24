@@ -3,7 +3,6 @@ package com.axeldavalos.moviesapplication.utils
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import coil.api.load
-import coil.transform.CircleCropTransformation
 
 
 @BindingAdapter("app:imageUrl")
