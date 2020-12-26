@@ -25,4 +25,5 @@ class MoviesAdapter : BaseAdapter<MovieBoxViewModel>(diffCallback = object :
     override fun getLayoutIdForPosition(position: Int): Int {
         return R.layout.movie_box
     }
+
 }

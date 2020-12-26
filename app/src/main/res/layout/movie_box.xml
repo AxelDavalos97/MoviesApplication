@@ -18,6 +18,7 @@
         android:layout_marginEnd="5dp"
         android:layout_marginStart="5dp"
         android:layout_marginBottom="5dp"
+        android:onClick="@{() -> obj.onClickItem(obj.id)}"
         app:cardCornerRadius="10dp"
         app:cardBackgroundColor="@color/cardview_light_background"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -28,9 +29,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:imageUrl="@{obj.img}"
-            android:src="@mipmap/ic_launcher">
+            android:src="@mipmap/ic_launcher"/>
 
-        </ImageView>
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
@@ -49,7 +50,7 @@
                 android:text="@{obj.title}"
                 android:textColor="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"></TextView>
+                app:layout_constraintTop_toTopOf="parent"/>
 
             <TextView
                 android:layout_width="0dp"
@@ -59,17 +60,20 @@
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/imageView"
-                app:layout_constraintStart_toStartOf="parent"></TextView>
+                app:layout_constraintStart_toStartOf="parent" />
 
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
+                android:padding="2dp"
+                android:layout_marginEnd="5dp"
                 android:src="@drawable/star_icon"
                 android:elevation="100dp"
+                android:scaleType="centerInside"
                 android:translationZ="100dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/textView2"></ImageView>
+                app:layout_constraintEnd_toStartOf="@+id/textView2" />
 
             <TextView
                 android:id="@+id/textView2"

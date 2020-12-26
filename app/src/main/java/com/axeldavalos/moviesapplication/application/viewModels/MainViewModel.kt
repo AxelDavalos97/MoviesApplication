@@ -7,6 +7,7 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.axeldavalos.moviesapplication.BuildConfig
+import com.axeldavalos.moviesapplication.R
 import com.axeldavalos.moviesapplication.domain.model.Movie
 import com.axeldavalos.moviesapplication.domain.model.MovieResponse
 import com.axeldavalos.moviesapplication.domain.useCases.GetMovies
@@ -24,13 +25,18 @@ class MainViewModel  @ViewModelInject constructor(
 ) : ViewModel() {
 
     val moviesList = MutableLiveData(mutableListOf<MovieBoxViewModel>())
+    val progressBarVisibility = MutableLiveData(View.GONE)
+    val isLoading = MutableLiveData(false)
 
     fun getMoviesList(){
-
+        progressBarVisibility.postValue(View.VISIBLE)
+        isLoading.postValue(true)
         getMovies.execute(
             { it ->
                 it.either({
-                Toast.makeText(context,it.msg,Toast.LENGTH_SHORT)
+                    Toast.makeText(context, R.string.general_error,Toast.LENGTH_SHORT)
+                    progressBarVisibility.postValue(View.GONE)
+                    isLoading.postValue(true)
             }, {
                 handleGetMovies(it)
             }) },
@@ -45,12 +51,20 @@ class MainViewModel  @ViewModelInject constructor(
         }
         val list = mutableListOf<MovieBoxViewModel>()
         movies.movies.forEach {
-            val row = MovieBoxViewModel()
+            val row = MovieBoxViewModel(context)
             row.setData(it)
             list.add(row)
         }
+        progressBarVisibility.postValue(View.GONE)
+        isLoading.postValue(false)
         this.moviesList.postValue(list)
 
     }
+
+    fun onRefresh(){
+        getMoviesList()
+    }
+
+
 
 }

@@ -15,7 +15,7 @@ import javax.inject.Singleton
 @InstallIn(ApplicationComponent::class)
 object NetworkModule {
 
-    private const val BASE_URL = "https://api.themoviedb.org/3/movie/"
+    private const val BASE_URL = "https://api.themoviedb.org/3/"
 
     private val moshiAdapter =
         Moshi.Builder().build()
