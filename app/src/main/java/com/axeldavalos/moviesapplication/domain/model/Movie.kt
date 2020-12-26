@@ -1,4 +1,4 @@
-package com.axeldavalos.moviesapplication.model
+package com.axeldavalos.moviesapplication.domain.model
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass

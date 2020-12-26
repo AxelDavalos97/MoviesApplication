@@ -1,4 +1,4 @@
-package com.axeldavalos.moviesapplication.utils
+package com.axeldavalos.moviesapplication.application.utils
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class ViewHolder(private val binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root) {
     fun bind(obj: RecyclerViewViewModel) {
-        binding.setVariable(BR._all, obj)
+        binding.setVariable(BR.obj, obj)
         binding.executePendingBindings()
     }
 }

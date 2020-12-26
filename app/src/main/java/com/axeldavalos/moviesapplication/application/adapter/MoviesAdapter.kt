@@ -1,9 +1,10 @@
-package com.axeldavalos.moviesapplication.movieslist
+package com.axeldavalos.moviesapplication.application.adapter
 
 import android.annotation.SuppressLint
 import androidx.recyclerview.widget.DiffUtil
 import com.axeldavalos.moviesapplication.R
-import com.axeldavalos.moviesapplication.utils.BaseAdapter
+import com.axeldavalos.moviesapplication.application.viewModels.MovieBoxViewModel
+import com.axeldavalos.moviesapplication.application.utils.BaseAdapter
 
 class MoviesAdapter : BaseAdapter<MovieBoxViewModel>(diffCallback = object :
     DiffUtil.ItemCallback<MovieBoxViewModel>() {

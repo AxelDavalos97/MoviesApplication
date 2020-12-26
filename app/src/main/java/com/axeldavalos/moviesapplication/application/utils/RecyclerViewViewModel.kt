@@ -1,4 +1,4 @@
-package com.axeldavalos.moviesapplication.utils
+package com.axeldavalos.moviesapplication.application.utils
 
 import androidx.lifecycle.ViewModel
 

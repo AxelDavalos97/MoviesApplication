@@ -1,9 +1,8 @@
-package com.axeldavalos.moviesapplication.movieslist
+package com.axeldavalos.moviesapplication.application.viewModels
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.axeldavalos.moviesapplication.model.Movie
-import com.axeldavalos.moviesapplication.utils.RecyclerViewViewModel
+import com.axeldavalos.moviesapplication.domain.model.Movie
+import com.axeldavalos.moviesapplication.application.utils.RecyclerViewViewModel
 
 class MovieBoxViewModel : RecyclerViewViewModel() {
     val img = MutableLiveData("")
