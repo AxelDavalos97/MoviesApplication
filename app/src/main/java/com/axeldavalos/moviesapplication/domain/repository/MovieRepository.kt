@@ -8,6 +8,6 @@ import com.axeldavalos.moviesapplication.domain.model.MovieDetail
 import com.axeldavalos.moviesapplication.domain.model.MovieResponse
 
 interface MovieRepository {
-    fun getMovies(api_key: String, context: Context): Either<Failure, MovieResponse>
+    fun getMovies(api_key: String, page:Int): Either<Failure, MovieResponse>
     fun getMovieDetail(id_movie: Int,api_key: String, context: Context): Either<Failure,MovieDetail>
 }

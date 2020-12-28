@@ -4,10 +4,14 @@ import android.content.Context
 import android.view.View
 import android.widget.Toast
 import androidx.hilt.lifecycle.ViewModelInject
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.paging.LivePagedListBuilder
+import androidx.paging.PagedList
 import com.axeldavalos.moviesapplication.BuildConfig
 import com.axeldavalos.moviesapplication.R
+import com.axeldavalos.moviesapplication.application.datasource.MoviesDataSourceFactory
 import com.axeldavalos.moviesapplication.domain.model.Movie
 import com.axeldavalos.moviesapplication.domain.model.MovieResponse
 import com.axeldavalos.moviesapplication.domain.useCases.GetMovies
@@ -24,45 +28,47 @@ class MainViewModel  @ViewModelInject constructor(
     @ApplicationContext private val context: Context
 ) : ViewModel() {
 
-    val moviesList = MutableLiveData(mutableListOf<MovieBoxViewModel>())
     val progressBarVisibility = MutableLiveData(View.GONE)
     val isLoading = MutableLiveData(false)
+    var moviesList: LiveData<PagedList<MovieBoxViewModel>>? = null
+    private val pageSize = 10
+    private val movieDataSourceFactory: MoviesDataSourceFactory = MoviesDataSourceFactory(getMovies, this,context)
 
+    init {
+        val config = PagedList.Config.Builder()
+            .setPageSize(pageSize)
+            .setInitialLoadSizeHint(pageSize)
+            .setEnablePlaceholders(false)
+            .build()
+        moviesList = LivePagedListBuilder(
+            movieDataSourceFactory,
+            config
+        ).build()
+    }
     fun getMoviesList(){
         progressBarVisibility.postValue(View.VISIBLE)
         isLoading.postValue(true)
-        getMovies.execute(
-            { it ->
-                it.either({
-                    Toast.makeText(context, R.string.general_error,Toast.LENGTH_SHORT)
-                    progressBarVisibility.postValue(View.GONE)
-                    isLoading.postValue(true)
-            }, {
-                handleGetMovies(it)
-            }) },
-            GetMovies.Params(api_key = BuildConfig.THE_MOVIE_DB_API_TOKEN , context = context)
-        )
     }
 
-    private fun handleGetMovies(movies: MovieResponse) {
 
-        if (movies.movies.isNullOrEmpty()) {
-            return
-        }
-        val list = mutableListOf<MovieBoxViewModel>()
-        movies.movies.forEach {
-            val row = MovieBoxViewModel(context)
-            row.setData(it)
-            list.add(row)
-        }
+    fun setStateNonLoading(){
         progressBarVisibility.postValue(View.GONE)
         isLoading.postValue(false)
-        this.moviesList.postValue(list)
+    }
 
+    fun setStateLoading(){
+        progressBarVisibility.postValue(View.VISIBLE)
+        isLoading.postValue(true)
+    }
+
+    fun handleError(){
+        Toast.makeText(context, R.string.general_error,Toast.LENGTH_SHORT)
+        progressBarVisibility.postValue(View.GONE)
+        isLoading.postValue(false)
     }
 
     fun onRefresh(){
-        getMoviesList()
+        movieDataSourceFactory.refresh()
     }
 
 

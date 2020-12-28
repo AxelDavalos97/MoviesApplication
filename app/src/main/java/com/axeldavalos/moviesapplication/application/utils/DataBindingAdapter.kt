@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.databinding.library.baseAdapters.BR
+import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.AsyncDifferConfig
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -17,7 +18,7 @@ class ViewHolder(private val binding: ViewDataBinding) : RecyclerView.ViewHolder
     }
 }
 
-abstract class BaseAdapter<T>(diffCallback: DiffUtil.ItemCallback<T>) : ListAdapter<T, ViewHolder>(
+abstract class BaseAdapter<T>(diffCallback: DiffUtil.ItemCallback<T>) : PagedListAdapter<T, ViewHolder>(
     AsyncDifferConfig.Builder<T>(diffCallback)
         .build()
 ) {
@@ -31,16 +32,19 @@ abstract class BaseAdapter<T>(diffCallback: DiffUtil.ItemCallback<T>) : ListAdap
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(getObjForPosition(position))
+        val item = getItem(position)
+        if (item != null) {
+            holder.bind(item as RecyclerViewViewModel)
+        }
     }
 
     override fun getItemViewType(position: Int): Int {
         return getLayoutIdForPosition(position)
     }
 
-    override fun getItemCount() = currentList.size
+    override fun getItemCount(): Int =  if (currentList == null)  0 else currentList!!.size
 
-    private fun getObjForPosition(position: Int) = currentList[position] as RecyclerViewViewModel
+    private fun getObjForPosition(position: Int) = currentList?.get(position) as RecyclerViewViewModel
 
     protected abstract fun getLayoutIdForPosition(position: Int): Int
 }

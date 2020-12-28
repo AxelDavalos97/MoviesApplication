@@ -9,7 +9,8 @@ import com.axeldavalos.moviesapplication.application.utils.BaseAdapter
 class MoviesAdapter : BaseAdapter<MovieBoxViewModel>(diffCallback = object :
     DiffUtil.ItemCallback<MovieBoxViewModel>() {
     override fun areItemsTheSame(oldItem: MovieBoxViewModel, newItem: MovieBoxViewModel): Boolean {
-        return oldItem == newItem
+        return oldItem.id == newItem.id
+
     }
 
     @SuppressLint("DiffUtilEquals")

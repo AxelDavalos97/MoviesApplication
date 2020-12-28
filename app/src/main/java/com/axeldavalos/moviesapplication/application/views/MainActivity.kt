@@ -39,7 +39,7 @@ class MainActivity: AppCompatActivity() {
     }
 
     private fun setMoviesObserver() {
-        viewModel.moviesList.observe(this, {
+        viewModel.moviesList!!.observe(this, {
             adapter.submitList(it)
             Handler().postDelayed({
                 adapter.notifyDataSetChanged()

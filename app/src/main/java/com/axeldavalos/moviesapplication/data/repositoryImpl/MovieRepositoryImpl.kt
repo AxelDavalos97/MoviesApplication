@@ -11,8 +11,8 @@ import com.axeldavalos.moviesapplication.domain.model.MovieResponse
 import com.axeldavalos.moviesapplication.domain.repository.MovieRepository
 
 class MovieRepositoryImpl(private val service : MovieService) :Repository(), MovieRepository{
-    override fun getMovies(api_key: String, context: Context): Either<Failure, MovieResponse> {
-        return request(service.getMovies(api_key), {it}, MovieResponse())
+    override fun getMovies(api_key: String, page: Int): Either<Failure, MovieResponse> {
+        return request(service.getMovies(api_key,page), {it}, MovieResponse())
     }
 
     override fun getMovieDetail(

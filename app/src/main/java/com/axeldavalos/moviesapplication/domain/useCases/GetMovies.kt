@@ -12,7 +12,7 @@ import com.axeldavalos.moviesapplication.domain.model.MovieResponse
 class GetMovies(private val repo: MovieRepositoryImpl) :
     UseCase<MovieResponse, GetMovies.Params>() {
     override suspend fun run(params: Params): Either<Failure, MovieResponse> =
-        repo.getMovies(params.api_key!!,params.context)
+        repo.getMovies(params.api_key!!,params.page)
 
-    data class Params(val api_key: String?=null, val context: Context)
+    data class Params(val api_key: String?=null, val page : Int)
 }

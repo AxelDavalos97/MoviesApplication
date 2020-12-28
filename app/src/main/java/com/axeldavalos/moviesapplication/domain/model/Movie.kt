@@ -10,5 +10,5 @@ data class Movie (
     @Json(name = "original_title") val title: String,
     @Json(name = "vote_average") val votes: String,
     @Json(name = "release_date") val date: String,
-    @Json(name = "poster_path") val image: String,
+    @Json(name = "poster_path") val image: String?,
     )
