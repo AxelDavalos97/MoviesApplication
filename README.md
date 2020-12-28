@@ -2,11 +2,13 @@
 
 #To run project:
 
-1.- Open AndroidStudio
-2.- Select "Get from Version Control"
-3.- Paste the url :"https://github.com/AxelDavalos97/MoviesApplication.git" 
-4.- Click on "Clone"
-5.- Open project
-6.- In the file gradle.properties paste your MoviesDB API KEY:
-   Example: TheMovieDBApiToken="myApiKey"
-6.- Run
+1. Open AndroidStudio
+1. Select "Get from Version Control"
+1. Paste the url :"https://github.com/AxelDavalos97/MoviesApplication.git" 
+1. Click on "Clone"
+1. Open project
+1. In the file gradle.properties paste your MoviesDB API KEY:
+   ```
+    TheMovieDBApiToken="myApiKey"
+   ```
+1. Run
