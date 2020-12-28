@@ -23,7 +23,6 @@ class MainActivity: AppCompatActivity() {
         setViewBinding()
         setAdapter()
         setMoviesObserver()
-        getMovies()
     }
 
     private fun setViewBinding() {
@@ -47,8 +46,6 @@ class MainActivity: AppCompatActivity() {
         })
     }
 
-    private fun getMovies() {
-        viewModel.getMoviesList()
-    }
+
 
 }

@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Movies</string>
-    <string name="general_error">Oops something gone wrong.</string>
+    <string name="general_error">Oops something gone wrong.
+        Swipe to refresh.</string>
 </resources>

@@ -29,6 +29,8 @@ class MainViewModel  @ViewModelInject constructor(
 ) : ViewModel() {
 
     val progressBarVisibility = MutableLiveData(View.GONE)
+    val errorVisibility = MutableLiveData(View.GONE)
+    val listVisibility = MutableLiveData(View.VISIBLE)
     val isLoading = MutableLiveData(false)
     var moviesList: LiveData<PagedList<MovieBoxViewModel>>? = null
     private val pageSize = 10
@@ -45,26 +47,27 @@ class MainViewModel  @ViewModelInject constructor(
             config
         ).build()
     }
-    fun getMoviesList(){
-        progressBarVisibility.postValue(View.VISIBLE)
-        isLoading.postValue(true)
-    }
+
 
 
     fun setStateNonLoading(){
         progressBarVisibility.postValue(View.GONE)
         isLoading.postValue(false)
+        errorVisibility.postValue(View.GONE)
+        listVisibility.postValue(View.VISIBLE)
     }
 
     fun setStateLoading(){
+        errorVisibility.postValue(View.GONE)
         progressBarVisibility.postValue(View.VISIBLE)
         isLoading.postValue(true)
     }
 
     fun handleError(){
-        Toast.makeText(context, R.string.general_error,Toast.LENGTH_SHORT)
         progressBarVisibility.postValue(View.GONE)
+        errorVisibility.postValue(View.VISIBLE)
         isLoading.postValue(false)
+        listVisibility.postValue(View.GONE)
     }
 
     fun onRefresh(){
