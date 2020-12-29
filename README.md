@@ -11,4 +11,11 @@
    ```
     TheMovieDBApiToken="myApiKey"
    ```
+1. Clean and rebuild project
 1. Run
+
+
+REQUIREMENTS:
+1. gradle plugin 4.1.1
+1. gradle version 6.5
+1. kotlin version 1.4.21
